@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dice Game</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<style>
+			body{background:#ffe6e6;}
+			.roll-btn{ background-image: url("images/dice2.png");	background-repeat: no-repeat;	height: 54px;	width: 53px;  border-radius: 8px;	}
+			.refreshbtn{	background-color: #ad111f;	font-size: large;	}
+			#quiz{	width: 400px;	height: 200px;	}
+			h2{	 text-shadow: 2px 2px #d42837;	}
+			h3{	color: #f5b342;	text-shadow: 2px 2px black;	}
+			div{	padding-top: 10px;	}
+			#tickmark{	padding-bottom: 40px;	}
+			label{ font-weight: bold;	}
+			a{	color: black;	}
+	</style>
+
+	<script>
+		    	var random="";
+			// var count=0;
+			// while(count<=2){
+	function tryAgain(){
+
+					var radio = document.querySelector("input[type=radio][name=ans]:checked");
+			    radio.checked = false;
+					document.getElementById("right").style.display="none";
+					document.getElementById("wrong").style.display="none";
+				//if(count>=2){document.getElementById("attempt").innerHTML="<h1 style="color:red;">Sorry no More Attempts</h1>";}
+			// count++;
+	}
+//}//here while loop ends
+
+
+	function roll(){
+
+
+			//...when we click dice this is to uncheck the radio btn (only if it is checked)
+				if($("input[type=radio][name=ans]").is(":checked"))
+					{
+							$("input[type=radio][name=ans]").prop("checked",false);
+					}
+
+				//this is to display a new question image when we roll dice
+				setTimeout(function(){
+						random = Math.floor(Math.random()*5)+1;
+						document.getElementById("result").innerHTML="<img id='"+random+"' value='"+random+"' src='images/question"+random+".jpg'>";
+				 		$("#tickmark").addClass("d-block");
+						$(".roll-btn").css("background-image","url('images/dice"+random+".png')");
+					}, 300);
+
+					document.getElementById("right").style.display="none";
+					document.getElementById("wrong").style.display="none";
+
+			}
+
+	function radioClick(ans){
+					var radioSelect= ans;
+
+					var imageNum = random;
+
+					switch(imageNum)
+					{
+					  		case 1:
+									if(radioSelect=="D"){
+												document.getElementById("right").style.display="block";
+												}else{
+														document.getElementById("wrong").style.display="block";
+													}
+										break;
+
+					  		case 2:
+									if(radioSelect=="B"){
+												document.getElementById("right").style.display="block";
+												}else{
+													document.getElementById("wrong").style.display="block";
+												}
+								    break;
+
+								case 3:
+									if(radioSelect=="C"){
+									 			document.getElementById("right").style.display="block";
+								 				}else{
+													document.getElementById("wrong").style.display="block";
+												}
+								    break;
+
+								case 4:
+									if(radioSelect=="A"){
+												document.getElementById("right").style.display="block";
+												}else{
+													document.getElementById("wrong").style.display="block";
+												}
+								    break;
+
+								case 5:
+									if(radioSelect=="D"){
+												document.getElementById("right").style.display="block";
+												}else{
+													document.getElementById("wrong").style.display="block";
+												}
+								    break;
+					  		default:
+										alert("invalid input");
+					}
+
+		}
+
+		// function roll(){
+		// 		if($("input[type=radio][name=ans]:checked").checked="false";
+		// 			{
+		// 					rollon();
+		// 			}
+		// 	}
+
+	</script>
+	</head>
+
+	<body>
+		<div class="container text-center">
+				<img id="quiz" src="images/quizImage.jpg">
+				<br>
+				<h2 style="font-size:40px;">Lets Start The Quiz</h2>
+				<hr>
+				<br>
+				<h3 style="font-size:40px;">Roll The Dice</h3>
+				<br>
+				<button class="roll-btn" onclick="roll()"></button>
+		</div>
+		<br>
+		<div class="container text-center" id="result">
+				<a href="E:\Dice\gamePlay.html" class="btn refreshbtn text-warning btn-sm">Restart</a>
+		</div>
+
+		<div class="container text-center d-none" id="tickmark">
+				<input type="radio" id="A" name="ans" value="A" onclick="radioClick(this.value)">
+	  		<label for="A">A</label>
+	  		<input type="radio" id="B" name="ans" value="B" onclick="radioClick(this.value)">
+	  		<label for="B">B</label>
+	  		<input type="radio" id="C" name="ans" value="C" onclick="radioClick(this.value)">
+	  		<label for="C">C</label>
+				<input type="radio" id="D" name="ans" value="D" onclick="radioClick(this.value)">
+	  		<label for="D">D</label>
+				<br>
+				<div id="attempt">
+				</div>
+				<div id="right" style="display: none">
+							<h1 style="color:#1ecc0e;">ANSWER IS CORRECT</h1 >
+							<br>
+							<h2 style="color:#1ecc0e;">ROLL THE DICE AGAIN</h2 >
+				</div>
+				<div id="wrong" style="display: none">
+		   				<h1 style="color:red;">ANSWER IS WRONG</h1 >
+						 	<br>
+							<h3 style="font-size:40px;">Do You want to try again ?<h3>
+							<button id="try" class="btn btn-success btn-sm" onclick="tryAgain()">Yes</button>
+		   	</div>
+				<hr>
+				<h3 style="font-size:35px;">Start Again</h3>
+				<a href="E:\Dice\gamePlay.html" class="btn refreshbtn text-warning btn-sm">Restart</a>
+				<br>
+	  </div>
+
+  </body>
+</html>
