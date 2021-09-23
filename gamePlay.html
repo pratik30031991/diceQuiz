@@ -23,24 +23,27 @@
 
 	<script>
 		    	var random="";
-			// var count=0;
+					var count=0;
 			// while(count<=2){
 	function tryAgain(){
-
-					var radio = document.querySelector("input[type=radio][name=ans]:checked");
-			    radio.checked = false;
-					document.getElementById("right").style.display="none";
-					document.getElementById("wrong").style.display="none";
-				//if(count>=2){document.getElementById("attempt").innerHTML="<h1 style="color:red;">Sorry no More Attempts</h1>";}
+					count++;
+					while(count<=2){
+						var radio = document.querySelector("input[type=radio][name=ans]:checked");
+				    radio.checked = false;
+						document.getElementById("right").style.display="none";
+						document.getElementById("wrong").style.display="none";
+						count=count+1;
+					}
+					if(count==3){
+						document.getElementById("chance").style.display="block";
+						count=0;
+					}
+			//if(count>=2){document.getElementById("attempt").innerHTML="<h1 style="color:red;">Sorry no More Attempts</h1>";}
 			// count++;
 	}
 //}//here while loop ends
-
-
 	function roll(){
-
-
-			//...when we click dice this is to uncheck the radio btn (only if it is checked)
+				//...when we click dice this is to uncheck the radio btn (only if it is checked)
 				if($("input[type=radio][name=ans]").is(":checked"))
 					{
 							$("input[type=radio][name=ans]").prop("checked",false);
@@ -56,8 +59,9 @@
 
 					document.getElementById("right").style.display="none";
 					document.getElementById("wrong").style.display="none";
+					document.getElementById("chance").style.display="none";
 
-			}
+				}
 
 	function radioClick(ans){
 					var radioSelect= ans;
@@ -153,6 +157,9 @@
 							<h1 style="color:#1ecc0e;">ANSWER IS CORRECT</h1 >
 							<br>
 							<h2 style="color:#1ecc0e;">ROLL THE DICE AGAIN</h2 >
+				</div>
+				<div id="chance" style="display: none">
+							<h2 style="color:red;">** No More Attempts left...please roll dice for the next Question **</h2 >
 				</div>
 				<div id="wrong" style="display: none">
 		   				<h1 style="color:red;">ANSWER IS WRONG</h1 >
